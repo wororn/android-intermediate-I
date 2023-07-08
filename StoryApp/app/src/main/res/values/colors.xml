@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="teal_100">#1EEFDB</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_more_smoke">#D8FBFBFB</color>
+    <color name="white_smoke">#EDEDED</color>
+    <color name="blue">#188EEC</color>
+    <color name="p_dark">#FF24292E</color>
+    <color name="grey_more_light">#D8D7D7</color>
+    <color name="grey_light">#CCC6C6</color>
+    <color name="p_color">#FF545A61</color>
+    <color name="p_light">#FF718792</color>
+    <color name="s_dark">#FFAEAEAE</color>
+    <color name="blue_more_dark">#02061E</color>
+    <color name="bd_color">#040733</color>
+    <color name="s_color">#FFE0E0E0</color>
+    <color name="loading_blue">#5591CAF8</color>
+    <color name="blue_stroke">#53B1FB</color>
+    <color name="light_blue_10">#E8D8FDFB</color>
+    <color name="light_blue_50">#C0EAFD</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#07A1EC</color>
+    <color name="light_blue_900">#FBFCFD</color>
+    <color name="transparent">#00000000</color>
+    <color name="black_overlay">#66000000</color>
+</resources>

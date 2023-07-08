@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_more_smoke"
+    tools:context=".interfaces.login.LoginActivity">
+
+    <TextView
+        android:id="@+id/tv_loginPage"
+        style="@style/tvTitle"
+        android:layout_marginTop="20dp"
+        android:text="@string/login"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/img_login"
+        app:layout_constraintStart_toStartOf="@+id/img_login"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_login"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/welcome_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_loginPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:srcCompat="@drawable/image" />
+
+    <TextView
+        android:id="@+id/tv_emailLogin"
+        style="@style/tvET"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roundedshape"
+        android:text="@string/email"
+        app:layout_constraintEnd_toEndOf="@+id/img_login"
+        app:layout_constraintStart_toStartOf="@+id/img_login"
+        app:layout_constraintTop_toBottomOf="@+id/img_login" />
+
+    <com.wororn.storyapp.customeditor.EmailEditText
+        android:id="@+id/ce_emailLogin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="0"
+        android:drawableStart="@drawable/ic_baseline_email_24dp"
+        android:hint="@string/email_hint"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="@+id/img_login"
+        app:layout_constraintStart_toStartOf="@+id/img_login"
+        app:layout_constraintTop_toBottomOf="@+id/tv_emailLogin"
+        tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/tv_passwordLogin"
+        style="@style/tvET"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roundedshape"
+        android:text="@string/password"
+        app:layout_constraintEnd_toEndOf="@+id/ce_emailLogin"
+        app:layout_constraintStart_toStartOf="@+id/ce_emailLogin"
+        app:layout_constraintTop_toBottomOf="@+id/ce_emailLogin" />
+
+    <com.wororn.storyapp.customeditor.PasswordEditText
+        android:id="@+id/ce_passwordLogin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="0"
+        android:drawableStart="@drawable/ic_baseline_lock_24dp"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="@+id/ce_emailLogin"
+        app:layout_constraintStart_toStartOf="@+id/tv_passwordLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_passwordLogin"
+        tools:ignore="MissingClass,NotSibling" />
+
+    <com.wororn.storyapp.customeditor.WoroButton
+        android:id="@+id/btn_login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0"
+        android:elevation="5dp"
+        android:text="@string/login"
+        android:textColor="#0B102C"
+        android:background="@drawable/bg_button"
+        app:layout_constraintEnd_toEndOf="@+id/ce_passwordLogin"
+        app:layout_constraintStart_toStartOf="@+id/ce_passwordLogin"
+        app:layout_constraintTop_toBottomOf="@+id/ce_passwordLogin"
+        tools:ignore="DuplicateSpeakableTextCheck,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_txtReg"
+        style="@style/tvAcc.black"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_reg"
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_regLogin"
+        style="@style/tvAcc.blue"
+        android:layout_marginStart="8dp"
+        android:text="@string/register"
+        app:layout_constraintStart_toEndOf="@+id/tv_txtReg"
+        app:layout_constraintTop_toTopOf="@+id/tv_txtReg" />
+
+    <TextView
+        android:id="@+id/tv_copyright"
+        style="@style/tvAcc.blue"
+        android:layout_width="300dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="3dp"
+        android:text="@string/copyright"
+        app:layout_constraintEnd_toEndOf="@id/tv_regLogin"
+        app:layout_constraintStart_toStartOf="@+id/tv_txtReg"
+        app:layout_constraintTop_toBottomOf="@+id/tv_regLogin" />
+
+    <RelativeLayout
+        android:id="@+id/progressBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="@color/loading_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_more_smoke"
+    tools:context=".interfaces.main.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/preview_image"
+            android:layout_width="392dp"
+            android:layout_height="359dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/preview_imgDesc"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedrectangle"
+            app:srcCompat="@drawable/ic_baseline_place_holder"
+            app:strokeColor="#09DBEF"
+            app:strokeWidth="10dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchCompat"
+            android:layout_width="150dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_gallery"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/preview_image"
+            android:visibility="invisible"/>
+
+        <com.wororn.storyapp.customeditor.WoroButton
+            android:id="@+id/btn_camera"
+            android:layout_width="203dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_camera"
+            android:textColor="#0B102C"
+            android:background="@drawable/bg_button"
+            app:layout_constraintEnd_toEndOf="@+id/preview_image"
+            app:layout_constraintStart_toEndOf="@+id/switchCompat"
+            app:layout_constraintTop_toBottomOf="@+id/preview_image" />
+
+        <com.wororn.storyapp.customeditor.WoroButton
+            android:id="@+id/btn_gallery"
+            android:layout_width="375dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/gallery"
+            android:textColor="#0B102C"
+            android:background="@drawable/bg_button"
+            app:layout_constraintEnd_toEndOf="@+id/btn_camera"
+            app:layout_constraintStart_toStartOf="@+id/switchCompat"
+            app:layout_constraintTop_toBottomOf="@+id/switchCompat" />
+
+        <TextView
+            android:id="@+id/tv_addDesc"
+            style="@style/tvDesc"
+            android:layout_width="370dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/squareshape"
+            android:text="@string/description"
+            app:layout_constraintEnd_toEndOf="@+id/btn_gallery"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_gallery"
+            app:layout_constraintTop_toBottomOf="@+id/btn_gallery" />
+
+        <com.wororn.storyapp.customeditor.CustomEditText
+            android:id="@+id/ce_desc"
+            android:layout_width="370dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/desc_hint"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:textColorHint="#757575"
+            app:layout_constraintEnd_toEndOf="@+id/btn_gallery"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/switchCompat"
+            app:layout_constraintTop_toBottomOf="@+id/tv_addDesc"
+            tools:ignore="MissingClass" />
+
+        <com.wororn.storyapp.customeditor.WoroButton
+            android:id="@+id/btn_upload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/upload"
+            android:textColor="#0B102C"
+            android:background="@drawable/bg_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ce_desc"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/ce_desc"
+            app:layout_constraintTop_toBottomOf="@+id/ce_desc"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ProgressBar
+            android:id="@+id/progressBarLayout"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.457"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.607"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,37 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_more_smoke">
+    <item
+        android:id="@+id/main"
+        android:icon="@drawable/ic_baseline_home_24dp"
+        android:title="@string/home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_baseline_account_24dp"
+        android:title="@string/about"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/data_stories"
+        android:icon="@drawable/ic_baseline_add_24dp"
+        android:title="@string/data_stories"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_baseline_settings_24dp"
+        android:title="@string/settings"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/theme_mode"
+        android:title="@string/set_themes"
+        android:icon="@drawable/ic_baseline_dark_mode_24dp"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_baseline_logout_24dp"
+        android:title="@string/logout"
+        app:showAsAction="always"/>
+</menu>
