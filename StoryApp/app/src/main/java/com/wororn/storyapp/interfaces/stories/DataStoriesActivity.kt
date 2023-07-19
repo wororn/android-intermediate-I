@@ -86,6 +86,9 @@ class DataStoriesActivity : AppCompatActivity() {
     }
 
     private fun settingViewModel() {
+        val factoryMain: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
+        mainViewModel = ViewModelProvider(this@DataStoriesActivity, factoryMain)[MainViewModel::class.java]
+
         val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
         storiesViewModel = ViewModelProvider(this@DataStoriesActivity, factory)[StoriesViewModel::class.java]
 
