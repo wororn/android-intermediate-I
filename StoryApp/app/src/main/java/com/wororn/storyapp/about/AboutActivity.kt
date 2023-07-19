@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.wororn.storyapp.R
+import com.wororn.storyapp.factory.StoriesViewModelFactory
 import com.wororn.storyapp.factory.UsersViewModelFactory
 import com.wororn.storyapp.interfaces.main.*
 import com.wororn.storyapp.interfaces.setmodes.ModesActivity
@@ -27,6 +28,9 @@ class AboutActivity : AppCompatActivity() {
         settingDarkMode()
     }
     private fun settingDarkMode(){
+        val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
+        mainViewModel = ViewModelProvider(this@AboutActivity, factory)[MainViewModel::class.java]
+
         val factoryModes: UsersViewModelFactory = UsersViewModelFactory.getInstance(this@AboutActivity)
         modesViewModel = ViewModelProvider(this@AboutActivity, factoryModes)[ModesViewModel::class.java]
         modesViewModel.getThemeSettings().observe(this@AboutActivity
