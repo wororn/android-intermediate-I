@@ -27,7 +27,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
-    ): List<TabStoriesItem>
+    ): TableStoriesResponse
 
     @GET("stories")
     suspend fun tableStories(@Header("Authorization") token: String): TableStoriesResponse
