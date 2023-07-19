@@ -242,6 +242,13 @@ class DataStoriesActivity : AppCompatActivity() {
                                     }.show()
                                     Handler(Looper.getMainLooper()).postDelayed({
                                         alertBuilder.dismiss()
+                                        val intent = Intent(
+                                            this@DataStoriesActivity,
+                                            MainActivity::class.java
+                                        )
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        startActivity(intent)
                                     }, 2000)
                                 }
                             }//done
