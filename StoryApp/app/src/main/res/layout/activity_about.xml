@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:orientation="vertical"
-    android:background="?attr/colorOnPrimary"
+    android:background="?attr/colorSecondary"
     tools:context=".about.AboutActivity">
 
     <androidx.cardview.widget.CardView
