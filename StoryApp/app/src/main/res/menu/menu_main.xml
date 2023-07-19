@@ -1,12 +1,14 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white_more_smoke">
     <item
         android:id="@+id/main"
         android:icon="@drawable/ic_baseline_home_24dp"
         android:title="@string/home"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction"/>
     <item
         android:id="@+id/about"
         android:icon="@drawable/ic_baseline_account_24dp"
