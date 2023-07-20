@@ -4,6 +4,7 @@ package com.wororn.storyapp.componen.response
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Query
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -18,6 +19,7 @@ data class TableStoriesResponse(
     @field:SerializedName("message")
     val message: String
 )
+
 
 @Parcelize
 @Entity(tableName = "stories")
@@ -38,3 +40,11 @@ data class TabStoriesItem(
     @field:SerializedName("description")
     val description: String? = null
 ) : Parcelable
+
+
+data class SearchStoriesResponse(
+
+    @field:SerializedName("listStory")
+    val  listStory: List<TabStoriesItem>
+
+)

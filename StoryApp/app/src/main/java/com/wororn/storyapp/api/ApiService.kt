@@ -29,6 +29,15 @@ interface ApiService {
         @Query("size") size: Int,
     ): TableStoriesResponse
 
+
+    @GET("stories")
+    suspend fun searchStory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("query") query: String,
+    ): SearchStoriesResponse
+
     @GET("stories")
     suspend fun tableStories(@Header("Authorization") token: String): TableStoriesResponse
 

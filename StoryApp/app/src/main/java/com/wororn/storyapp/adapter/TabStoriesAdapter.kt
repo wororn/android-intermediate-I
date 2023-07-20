@@ -61,7 +61,7 @@ class TabStoriesAdapter: PagingDataAdapter<TabStoriesItem, TabStoriesAdapter.Lis
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TabStoriesItem>() {
+         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TabStoriesItem>() {
             override fun areItemsTheSame(
                 oldItem:TabStoriesItem,
                 newItem: TabStoriesItem)
