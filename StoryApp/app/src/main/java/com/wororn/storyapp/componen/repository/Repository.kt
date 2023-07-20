@@ -11,6 +11,7 @@ import androidx.paging.*
 import com.wororn.storyapp.tools.Status
 import com.wororn.storyapp.api.ApiService
 import com.wororn.storyapp.componen.response.*
+import com.wororn.storyapp.paging.SearchPagingSource
 import com.wororn.storyapp.paging.StoriesPagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,7 +19,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.lang.Exception
 
-class StoriesRepository (private val apiService: ApiService,) {
+class StoriesRepository (private val apiService: ApiService) {
     fun listStory(token: String): LiveData<PagingData<TabStoriesItem>> {
 
         return Pager(
@@ -33,18 +34,27 @@ class StoriesRepository (private val apiService: ApiService,) {
         ).liveData
     }
 
-    fun tableStories(token: String): LiveData<PagingData<TabStoriesItem>> = liveData {
-        apiService.tableStories("Bearer $token")
-    }
+    fun getSearchStory(token: String, query: String): LiveData<PagingData<TabStoriesItem>> {
 
-    fun tabStories(token: String) : LiveData<Status<TableStoriesResponse>> = liveData {
+            return Pager(
+                config = PagingConfig(
+                    pageSize = 5,
+                     maxSize=100,
+                     enablePlaceholders = false
+                ),
 
-        val data = apiService.tableStories("Bearer $token")
-        emit(Status.Done(data))
+                pagingSourceFactory = {
+                    SearchPagingSource(apiService, token, query)
+                }
+            ).liveData
+        }
 
-    }
 
-        fun addFieldStories(token: String, photo: MultipartBody.Part, desc: RequestBody) : LiveData<Status<DataStoriesResponse>> = liveData {
+        fun addFieldStories(
+            token: String,
+            photo: MultipartBody.Part,
+            desc: RequestBody
+        ): LiveData<Status<DataStoriesResponse>> = liveData {
             emit(Status.Process)
             try {
                 val data = apiService.addFieldStories("Bearer $token", photo, desc)
@@ -55,82 +65,93 @@ class StoriesRepository (private val apiService: ApiService,) {
         }
 
 
-    companion object {
-        @Volatile
-        private var instanceStories: StoriesRepository? = null
-        fun getInstance(apiService: ApiService): StoriesRepository =
-            instanceStories ?: synchronized(this) {
-                instanceStories ?: StoriesRepository(apiService)
-            }.also { instanceStories = it }
+        companion object {
+            @Volatile
+            private var instanceStories: StoriesRepository? = null
+            fun getInstance(apiService: ApiService): StoriesRepository =
+                instanceStories ?: synchronized(this) {
+                    instanceStories ?: StoriesRepository(apiService)
+                }.also { instanceStories = it }
+        }
     }
-}
 
 
-class UsersRepository private constructor(private val dataStore: DataStore<Preferences>, private val apiService: ApiService) {
-    fun login(email: String, password: String) : LiveData<Status<LoginResponse>> = liveData {
-        emit(Status.Process)
-        try {
+    class UsersRepository private constructor(
+        private val dataStore: DataStore<Preferences>,
+        private val apiService: ApiService
+    ) {
+        fun login(email: String, password: String): LiveData<Status<LoginResponse>> = liveData {
+            emit(Status.Process)
+            try {
                 val data = apiService.login(email, password)
-                emit(Status.Done(data))
-           } catch (except: Exception) {
-               emit(Status.Fail(except.message.toString()))
-           }
-    }
-
-    fun register(name: String, email: String, password: String) : LiveData<Status<RegisterResponse>> = liveData {
-        emit(Status.Process)
-        try {
-                val data =  apiService.register(name, email, password)
                 emit(Status.Done(data))
             } catch (except: Exception) {
                 emit(Status.Fail(except.message.toString()))
             }
-    }
-
-    fun getToken(): Flow<String> {
-        return dataStore.data.map { preferences ->
-            preferences[TOKEN] ?: ""
         }
-    }
 
-    suspend fun setToken(token: String) {
-        dataStore.edit { preferences ->
-            preferences[TOKEN] = token
+        fun register(
+            name: String,
+            email: String,
+            password: String
+        ): LiveData<Status<RegisterResponse>> = liveData {
+            emit(Status.Process)
+            try {
+                val data = apiService.register(name, email, password)
+                emit(Status.Done(data))
+            } catch (except: Exception) {
+                emit(Status.Fail(except.message.toString()))
+            }
         }
-    }
 
-    suspend fun logout() {
-        dataStore.edit { preferences ->
-            preferences[TOKEN] = ""
-            preferences[EXTRA_KEY] = false
+        fun getToken(): Flow<String> {
+            return dataStore.data.map { preferences ->
+                preferences[TOKEN] ?: ""
+            }
         }
-    }
 
-    fun getThemeSetting(): Flow<Boolean> {
-        return dataStore.data.map { preferences ->
-            preferences[EXTRA_KEY ] ?: false
+        suspend fun setToken(token: String) {
+            dataStore.edit { preferences ->
+                preferences[TOKEN] = token
+            }
         }
-    }
 
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[EXTRA_KEY ] = isDarkModeActive
+        suspend fun logout() {
+            dataStore.edit { preferences ->
+                preferences[TOKEN] = ""
+                preferences[EXTRA_KEY] = false
+            }
         }
-    }
 
-    companion object {
-        @Volatile
-        private var instanceUsers: UsersRepository? = null
+        fun getThemeSetting(): Flow<Boolean> {
+            return dataStore.data.map { preferences ->
+                preferences[EXTRA_KEY] ?: false
+            }
+        }
 
-        private val TOKEN = stringPreferencesKey("token")
-        private val EXTRA_KEY = booleanPreferencesKey("extra")
+        suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
+            dataStore.edit { preferences ->
+                preferences[EXTRA_KEY] = isDarkModeActive
+            }
+        }
 
-        fun getInstance(dataStore: DataStore<Preferences>, apiService: ApiService): UsersRepository {
-            return instanceUsers ?: synchronized(this) {
-                val instance = UsersRepository(dataStore, apiService)
-                instanceUsers = instance
-                instance
+        companion object {
+            @Volatile
+            private var instanceUsers: UsersRepository? = null
+
+            private val TOKEN = stringPreferencesKey("token")
+            private val EXTRA_KEY = booleanPreferencesKey("extra")
+
+            fun getInstance(
+                dataStore: DataStore<Preferences>,
+                apiService: ApiService
+            ): UsersRepository {
+                return instanceUsers ?: synchronized(this) {
+                    val instance = UsersRepository(dataStore, apiService)
+                    instanceUsers = instance
+                    instance
+                }
             }
         }
     }
-}
+

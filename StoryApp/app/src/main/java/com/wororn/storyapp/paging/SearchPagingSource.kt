@@ -1,15 +1,16 @@
 package com.wororn.storyapp.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wororn.storyapp.api.ApiService
 import com.wororn.storyapp.componen.response.TabStoriesItem
 
-class SearchPagingSource(private val apiService: ApiService, private val token:String) : PagingSource<Int, TabStoriesItem>() {
+class SearchPagingSource(private val apiService: ApiService, private val token:String,private val query : String) : PagingSource<Int, TabStoriesItem>() {
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1
-        private const val query : String =""
+
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TabStoriesItem> {
@@ -26,7 +27,9 @@ class SearchPagingSource(private val apiService: ApiService, private val token:S
             )
 
         } catch (exception: Exception) {
+            Log.e("TagSearchSource", "$exception")
             return LoadResult.Error(exception)
+
         }
 
     }

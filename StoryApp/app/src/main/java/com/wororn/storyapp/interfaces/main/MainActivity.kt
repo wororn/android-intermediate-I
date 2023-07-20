@@ -85,16 +85,6 @@ class MainActivity : AppCompatActivity() {
                  adapter.submitData(lifecycle, main)
                 }
 
-           //     val layoutManager = LinearLayoutManager(this)
-          //      mainbunching.rvStory.layoutManager = layoutManager
-           //     val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-          //      mainbunching.rvStory.addItemDecoration(itemDecoration)
-
-          //      mainViewModel.storyList.observe(this) { listStory ->
-          //          setReviewData(listStory)
-           //         Log.e("List", listStory.toString())
-             //   }
-
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
                 val searchView = mainbunching.Searchview
 
@@ -151,10 +141,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-  //  private fun setReviewData(listStory: List<TabStoriesItem>) {
-  //      val adapter = StoryAdapter(listStory as ArrayList<TabStoriesItem>)
- //       mainbunching.rvStory.adapter = adapter
- //   }
+
         private fun showLoading(isLoading: Boolean) {
             mainbunching.progressBarLayout.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
