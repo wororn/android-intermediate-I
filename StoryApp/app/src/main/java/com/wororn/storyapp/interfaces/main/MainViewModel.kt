@@ -3,11 +3,10 @@ package com.wororn.storyapp.interfaces.main
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.wororn.storyapp.componen.repository.*
+import com.wororn.storyapp.componen.repository.StoriesRepository
+import com.wororn.storyapp.componen.repository.UsersRepository
 import com.wororn.storyapp.componen.response.TabStoriesItem
 import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.ArrayList
 
 class MainViewModel(private val usersRepository: UsersRepository,private val storiesRepository: StoriesRepository) : ViewModel() {
 
@@ -23,15 +22,17 @@ class MainViewModel(private val usersRepository: UsersRepository,private val sto
         }
     }
 
-    fun listStory(token: String): LiveData<PagingData<TabStoriesItem>> =
-        storiesRepository.listStory(token).cachedIn(viewModelScope)
+ //   fun listStory(token: String): LiveData<PagingData<TabStoriesItem>> =
+  //      storiesRepository.listStory(token).cachedIn(viewModelScope)
 
     fun searchStory (token: String,query:String): LiveData<PagingData<TabStoriesItem>> = currentQuery.switchMap {
         storiesRepository.getSearchStory(token,query).cachedIn(viewModelScope)
     }
-    fun searchStories (token: String): LiveData<PagingData<TabStoriesItem>> = currentQuery.switchMap {
-        storiesRepository.listStory(token).cachedIn(viewModelScope)
-    }
+
+ //   fun searchStories (token: String): LiveData<PagingData<TabStoriesItem>> = currentQuery.switchMap {
+ //       storiesRepository.listStory(token).cachedIn(viewModelScope)
+ //   }
+
     fun searchQuery(query: String){
         currentQuery.value=query
 
