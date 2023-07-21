@@ -45,6 +45,8 @@ data class TabStoriesItem(
 data class SearchStoriesResponse(
 
     @field:SerializedName("listStory")
-    val  listStory: List<TabStoriesItem>
+    val  listStory: List<TabStoriesItem>,
+    @field:SerializedName("query")
+    val query: String? = null
 
 )

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainbunching: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var token: String
-
+    private  var  query:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.getToken().observe(this@MainActivity) { token ->
             this.token = token
+
             Log.e("TagMain", token)
             if (token.isNotEmpty()) {
                 val adapter = TabStoriesAdapter()
@@ -82,39 +83,37 @@ class MainActivity : AppCompatActivity() {
                        adapter.retry()
                    }
                 )
-                mainViewModel.searchStories(token).observe(this@MainActivity) { main ->
+                mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
                  adapter.submitData(lifecycle, main)
                 }
 
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
                 val searchView = mainbunching.Searchview
 
-            //    searchView.onFocusChangeListener =
-           //         View.OnFocusChangeListener { _, hasFocus ->
-            //            if (hasFocus) {
-            //                mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
-            //                    adapter.submitData(lifecycle, main)
-            //                }
-            //            }
-             //       }
-
                 searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
                 searchView.queryHint = getString(R.string.Cari)
                 showLoading(false)
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        if (query != null) {
+                        if (query != null && query !="") {
                             showLoading(true)
                             mainbunching.rvStory.scrollToPosition(0)
                             mainViewModel.searchQuery(query)
-                            searchView.clearFocus()
+                           // searchView.clearFocus()
+                        }
+                        else {
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Watch Out: The Query is Empty,You should login again",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         showLoading(false)
                         return true
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        return true
+                        return false
                     }
 
                 })

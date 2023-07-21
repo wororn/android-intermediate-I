@@ -35,7 +35,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
-        @Query("query") query: String,
+        @Query("query") query: String
     ): SearchStoriesResponse
 
     @GET("stories")
