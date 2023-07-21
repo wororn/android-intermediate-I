@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.getToken().observe(this@MainActivity) { token ->
             this.token = token
-
             Log.e("TagMain", token)
             if (token.isNotEmpty()) {
                 val adapter = TabStoriesAdapter()
@@ -107,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                         else {
                             Toast.makeText(
                                 this@MainActivity,
-                                "Watch Out: The Query is Empty,You should login again",
+                                "Information: The Query is Empty,You should try again",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
