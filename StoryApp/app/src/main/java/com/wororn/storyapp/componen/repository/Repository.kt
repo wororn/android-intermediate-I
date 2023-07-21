@@ -49,7 +49,6 @@ class StoriesRepository (private val apiService: ApiService) {
             ).liveData
         }
 
-
         fun addFieldStories(
             token: String,
             photo: MultipartBody.Part,
