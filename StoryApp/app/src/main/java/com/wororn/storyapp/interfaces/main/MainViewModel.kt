@@ -42,23 +42,6 @@ class MainViewModel(private val usersRepository: UsersRepository,private val sto
         return tabStories
     }
 
-    fun searchStories02(searchString: String): ArrayList<TabStoriesItem> {
-
-        val resultsList: ArrayList<TabStoriesItem> = ArrayList()
-
-        if (getStoriesList().value == null) return resultsList
-
-        if (getStoriesList().value!!.size > 0) {
-
-            for ( story in getStoriesList().value!!.iterator()) {
-                if (story.name!!.lowercase(Locale.ROOT).startsWith(searchString)) {
-                    resultsList.add(story)
-                }
-            }
-        }
-        resultsList.sortBy { it.name }
-        return resultsList
-    }
 companion object{
     private const val DEFAULT_SEARCH=""
 }

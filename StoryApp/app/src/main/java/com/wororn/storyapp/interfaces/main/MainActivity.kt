@@ -103,13 +103,18 @@ class MainActivity : AppCompatActivity() {
                 showLoading(false)
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        mainViewModel.searchQuery(query ?: "")
-                        showLoading(true)
-                        return false
+                        if (query != null) {
+                            showLoading(true)
+                            mainbunching.rvStory.scrollToPosition(0)
+                            mainViewModel.searchQuery(query)
+                            searchView.clearFocus()
+                        }
+                        showLoading(false)
+                        return true
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        return false
+                        return true
                     }
 
                 })
