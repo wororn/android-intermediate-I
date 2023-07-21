@@ -61,7 +61,7 @@ class MainViewModel(private val usersRepository: UsersRepository,private val sto
         return resultsList
     }
 companion object{
-    private const val DEFAULT_SEARCH="Cats"
+    private const val DEFAULT_SEARCH=""
 }
 }
 
