@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainbunching: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var token: String
-    private  var  query:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             mainbunching.rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
         }
-
+        val query: String = MutableLiveData("").value.toString()
         val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
         mainViewModel = ViewModelProvider(this@MainActivity, factory)[MainViewModel::class.java]
 
