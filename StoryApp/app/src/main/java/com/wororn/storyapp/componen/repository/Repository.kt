@@ -63,7 +63,6 @@ class StoriesRepository (private val apiService: ApiService) {
             }
         }
 
-
         companion object {
             @Volatile
             private var instanceStories: StoriesRepository? = null
@@ -73,7 +72,6 @@ class StoriesRepository (private val apiService: ApiService) {
                 }.also { instanceStories = it }
         }
     }
-
 
     class UsersRepository private constructor(
         private val dataStore: DataStore<Preferences>,
