@@ -78,10 +78,13 @@ class MainActivity : AppCompatActivity() {
             Log.e("TagMain", token)
             if (token.isNotEmpty()) {
                 val adapter = TabStoriesAdapter()
-                mainbunching.rvStory.adapter = adapter.withLoadStateFooter(
-                       footer = LoadingStateAdapter {
+                mainbunching.rvStory.adapter = adapter.withLoadStateHeaderAndFooter(
+                       header = LoadingStateAdapter {
                        adapter.retry()
-                   }
+                        },
+                        footer = LoadingStateAdapter {
+                           adapter.retry()
+                        }
                 )
                 mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
                  adapter.submitData(lifecycle, main)
@@ -99,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                             showLoading(true)
                             mainbunching.rvStory.scrollToPosition(0)
                             mainViewModel.searchQuery(query)
-                           // searchView.clearFocus()
+                            searchView.clearFocus()
                         }
                         else {
                             Toast.makeText(
