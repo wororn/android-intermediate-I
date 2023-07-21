@@ -1,6 +1,5 @@
 package com.wororn.storyapp.componen.response
 
-
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
