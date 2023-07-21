@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainbunching: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var token: String
+    private lateinit var query: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,12 +89,21 @@ class MainActivity : AppCompatActivity() {
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
                 val searchView = mainbunching.Searchview
 
+                searchView.onFocusChangeListener =
+                    View.OnFocusChangeListener { _, hasFocus ->
+                        if (hasFocus) {
+                            mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
+                                adapter.submitData(lifecycle, main)
+                            }
+                        }
+                    }
+
                 searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
                 searchView.queryHint = getString(R.string.Cari)
                 showLoading(false)
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        mainViewModel.searchStories(query ?: "")
+                        mainViewModel.searchQuery(query ?: "")
                         showLoading(true)
                         return false
                     }
