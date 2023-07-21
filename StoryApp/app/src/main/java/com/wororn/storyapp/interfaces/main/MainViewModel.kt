@@ -26,13 +26,12 @@ class MainViewModel(private val usersRepository: UsersRepository,private val sto
     fun listStory(token: String): LiveData<PagingData<TabStoriesItem>> =
         storiesRepository.listStory(token).cachedIn(viewModelScope)
 
-    fun getSearchStory(token: String,query:String): LiveData<PagingData<TabStoriesItem>> =
-        storiesRepository.getSearchStory(token,query).cachedIn(viewModelScope)
-
     fun searchStory (token: String,query:String): LiveData<PagingData<TabStoriesItem>> = currentQuery.switchMap {
         storiesRepository.getSearchStory(token,query).cachedIn(viewModelScope)
     }
-
+    fun searchStories (token: String): LiveData<PagingData<TabStoriesItem>> = currentQuery.switchMap {
+        storiesRepository.listStory(token).cachedIn(viewModelScope)
+    }
     fun searchQuery(query: String){
         currentQuery.value=query
 
@@ -43,7 +42,7 @@ class MainViewModel(private val usersRepository: UsersRepository,private val sto
         return tabStories
     }
 
-    fun searchStories(searchString: String): ArrayList<TabStoriesItem> {
+    fun searchStories02(searchString: String): ArrayList<TabStoriesItem> {
 
         val resultsList: ArrayList<TabStoriesItem> = ArrayList()
 

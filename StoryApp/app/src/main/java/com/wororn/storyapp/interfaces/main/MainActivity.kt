@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainbunching: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var token: String
-    private lateinit var query: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,25 +78,25 @@ class MainActivity : AppCompatActivity() {
             if (token.isNotEmpty()) {
                 val adapter = TabStoriesAdapter()
                 mainbunching.rvStory.adapter = adapter.withLoadStateFooter(
-                   footer = LoadingStateAdapter {
-                        adapter.retry()
+                       footer = LoadingStateAdapter {
+                       adapter.retry()
                    }
                 )
-                mainViewModel.listStory(token).observe(this@MainActivity) { main ->
+                mainViewModel.searchStories(token).observe(this@MainActivity) { main ->
                  adapter.submitData(lifecycle, main)
                 }
 
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
                 val searchView = mainbunching.Searchview
 
-                searchView.onFocusChangeListener =
-                    View.OnFocusChangeListener { _, hasFocus ->
-                        if (hasFocus) {
-                            mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
-                                adapter.submitData(lifecycle, main)
-                            }
-                        }
-                    }
+            //    searchView.onFocusChangeListener =
+           //         View.OnFocusChangeListener { _, hasFocus ->
+            //            if (hasFocus) {
+            //                mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
+            //                    adapter.submitData(lifecycle, main)
+            //                }
+            //            }
+             //       }
 
                 searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
                 searchView.queryHint = getString(R.string.Cari)
