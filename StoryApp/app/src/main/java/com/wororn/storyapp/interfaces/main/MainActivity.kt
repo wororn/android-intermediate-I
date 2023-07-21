@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             mainbunching.rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
         }
-        val query: String = MutableLiveData("").value.toString()
+        val query: String = MutableLiveData(mainbunching.Searchview.query).value.toString()
+        Log.e("TagQuery01", query)
         val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
         mainViewModel = ViewModelProvider(this@MainActivity, factory)[MainViewModel::class.java]
 
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
                  adapter.submitData(lifecycle, main)
+                    Log.e("TagQuery02", query)
                 }
 
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -99,8 +101,12 @@ class MainActivity : AppCompatActivity() {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         if (query != null && query !="") {
                             showLoading(true)
+                            mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
+                                adapter.submitData(lifecycle, main)
+                            }
                             mainbunching.rvStory.scrollToPosition(0)
                             mainViewModel.searchQuery(query)
+                            Log.e("TagQuery03", query)
                             searchView.clearFocus()
                         }
                         else {
