@@ -20,6 +20,8 @@ import okhttp3.RequestBody
 import java.lang.Exception
 
 class StoriesRepository (private val apiService: ApiService) {
+
+
     fun listStory(token: String): LiveData<PagingData<TabStoriesItem>> {
 
         return Pager(
@@ -33,6 +35,7 @@ class StoriesRepository (private val apiService: ApiService) {
             }
         ).liveData
     }
+
 
     fun getSearchStory(token: String, query: String): LiveData<PagingData<TabStoriesItem>> {
 

@@ -101,13 +101,14 @@ class MainActivity : AppCompatActivity() {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         if (query != null && query !="") {
                             showLoading(true)
-                            mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
-                                adapter.submitData(lifecycle, main)
-                            }
+
                             mainbunching.rvStory.scrollToPosition(0)
                             mainViewModel.searchQuery(query)
                             Log.e("TagQuery03", query)
                             searchView.clearFocus()
+                            mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
+                                adapter.submitData(lifecycle, main)
+                            }
                         }
                         else {
                             Toast.makeText(
@@ -115,6 +116,9 @@ class MainActivity : AppCompatActivity() {
                                 "Information: The Query is Empty,You should try again",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            mainViewModel.listStory(token).observe(this@MainActivity) { main ->
+                                adapter.submitData(lifecycle, main)
+                            }
                         }
                         showLoading(false)
                         return true
