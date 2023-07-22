@@ -43,7 +43,7 @@ data class SearchStoriesResponse(
 
     @field:SerializedName("listStory")
     val  listStory: List<TabStoriesItem>,
-    @field:SerializedName("query")
+    @field:SerializedName("name")
     val query: String? = null
 
 )
