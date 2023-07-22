@@ -36,11 +36,6 @@ class MainViewModel(private val usersRepository: UsersRepository,private val sto
  //       storiesRepository.listStory(token).cachedIn(viewModelScope)
  //   }
 
-    fun searchQuery(query: String){
-        currentQuery.value=query
-        pagingSource?.invalidate()
-
-    }
     private var tabStories: MutableLiveData<ArrayList<TabStoriesItem>> = MutableLiveData()
 
     private fun getStoriesList(): MutableLiveData<ArrayList<TabStoriesItem>> {
