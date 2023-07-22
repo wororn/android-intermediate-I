@@ -11,11 +11,11 @@ class SearchViewModel(private val apiService:ApiService,private val token:String
 
     get() {
         if (field==null||field?.invalid==true){
-
             field=SearchPagingSource(apiService,token,query)
         }
      return field
     }
+
     fun searchQuery(query: String){
         currentQuery.value=query
         pagingSource?.invalidate()
