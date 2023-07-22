@@ -3,12 +3,10 @@ package com.wororn.storyapp.interfaces.main
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.wororn.storyapp.api.ApiService
 import com.wororn.storyapp.componen.repository.StoriesRepository
 import com.wororn.storyapp.componen.repository.UsersRepository
 import com.wororn.storyapp.componen.response.TabStoriesItem
 import com.wororn.storyapp.paging.SearchPagingSource
-import com.wororn.storyapp.paging.StoriesPagingSource
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val usersRepository: UsersRepository,private val storiesRepository: StoriesRepository) : ViewModel() {
