@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainbunching: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var searchViewModel: SearchViewModel
     private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("TagQuery01", query)
         val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
         mainViewModel = ViewModelProvider(this@MainActivity, factory)[MainViewModel::class.java]
+        searchViewModel = ViewModelProvider(this@MainActivity)[SearchViewModel::class.java]
 
         mainViewModel.getToken().observe(this@MainActivity) { token ->
             if (token.isEmpty()) {
@@ -103,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                             showLoading(true)
 
                             mainbunching.rvStory.scrollToPosition(0)
-                            mainViewModel.searchQuery(query)
+                            searchViewModel.searchQuery(query)
                             Log.e("TagQuery03", query)
                             searchView.clearFocus()
                             mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
