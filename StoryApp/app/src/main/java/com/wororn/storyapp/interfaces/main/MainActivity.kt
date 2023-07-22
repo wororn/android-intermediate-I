@@ -103,7 +103,6 @@ class MainActivity : AppCompatActivity() {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         if (query != null && query !="") {
                             showLoading(true)
-
                             mainbunching.rvStory.scrollToPosition(0)
                             searchViewModel.searchQuery(query)
                             Log.e("TagQuery03", query)
