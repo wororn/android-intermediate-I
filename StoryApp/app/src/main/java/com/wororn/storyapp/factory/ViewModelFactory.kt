@@ -3,10 +3,8 @@ package com.wororn.storyapp.factory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.wororn.storyapp.api.ApiService
 import com.wororn.storyapp.componen.repository.StoriesRepository
 import com.wororn.storyapp.componen.repository.UsersRepository
-import com.wororn.storyapp.injection.ApiServiceInjection
 import com.wororn.storyapp.injection.StoriesInjection
 import com.wororn.storyapp.injection.UsersInjection
 import com.wororn.storyapp.interfaces.login.LoginViewModel
@@ -21,7 +19,7 @@ class StoriesViewModelFactory private constructor(private val usersRepository: U
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return when {
                 modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                    MainViewModel(usersRepository,storiesRepository) as T
+                    MainViewModel(usersRepository,storiesRepository ) as T
                 }
                 modelClass.isAssignableFrom(StoriesViewModel::class.java) -> {
                     StoriesViewModel(usersRepository, storiesRepository) as T
@@ -37,7 +35,7 @@ class StoriesViewModelFactory private constructor(private val usersRepository: U
             private var instanceStories: StoriesViewModelFactory? = null
             fun getInstance(context: Context): StoriesViewModelFactory =
                 instanceStories ?: synchronized(this) {
-                instanceStories ?: StoriesViewModelFactory(UsersInjection.providePreferences(context),StoriesInjection.provideRepository())
+                instanceStories ?: StoriesViewModelFactory(UsersInjection.providePreferences(context), StoriesInjection.provideRepository())
             }.also { instanceStories = it }
         }
 

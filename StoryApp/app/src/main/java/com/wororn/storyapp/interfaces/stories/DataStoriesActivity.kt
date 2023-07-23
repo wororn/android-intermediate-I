@@ -86,6 +86,7 @@ class DataStoriesActivity : AppCompatActivity() {
     }
 
     private fun settingViewModel() {
+
         val factoryMain: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
         mainViewModel = ViewModelProvider(this@DataStoriesActivity, factoryMain)[MainViewModel::class.java]
 
@@ -236,6 +237,7 @@ class DataStoriesActivity : AppCompatActivity() {
                                 } else {
                                     val alertBuilder = AlertDialog.Builder(this).create()
                                     alertBuilder.apply {
+                                        setTitle("Information")
                                         setMessage(resources.getString(R.string.store_message))
                                         setIcon(R.drawable.ic_baseline_check_green_24dp)
                                         setCancelable(false)

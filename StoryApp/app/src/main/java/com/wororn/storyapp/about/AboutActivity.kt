@@ -14,8 +14,7 @@ import com.wororn.storyapp.R
 import com.wororn.storyapp.factory.StoriesViewModelFactory
 import com.wororn.storyapp.factory.UsersViewModelFactory
 import com.wororn.storyapp.interfaces.main.*
-import com.wororn.storyapp.interfaces.setmodes.ModesActivity
-import com.wororn.storyapp.interfaces.setmodes.ModesViewModel
+import com.wororn.storyapp.interfaces.setmodes.*
 
 class AboutActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel

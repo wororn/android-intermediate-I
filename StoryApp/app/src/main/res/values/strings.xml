@@ -52,5 +52,4 @@
     <string name="retry">retry</string>
     <string name="set_themes">Mode</string>
     <string name="home">Home</string>
-    <string name="title_activity_search_view_model">SearchViewModel</string>
 </resources>

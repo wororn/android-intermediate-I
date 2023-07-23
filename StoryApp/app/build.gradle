@@ -16,9 +16,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     buildTypes {
@@ -36,12 +33,11 @@ android {
     }
     buildFeatures {
         viewBinding true
-        compose true
     }
-
 }
 
 dependencies {
+
 
     //noinspection GradleDependency
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -82,7 +78,6 @@ dependencies {
     implementation 'androidx.camera:camera-lifecycle:1.1.0-beta03'
     //noinspection GradleDependency
     implementation 'androidx.camera:camera-view:1.1.0-beta03'
-    
     //noinspection GradleDependency
 
     def roomVersion = '2.2.6'

@@ -15,14 +15,12 @@ import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wororn.storyapp.R
 import com.wororn.storyapp.about.AboutActivity
-import com.wororn.storyapp.adapter.LoadingStateAdapter
-import com.wororn.storyapp.adapter.TabStoriesAdapter
+import com.wororn.storyapp.adapter.*
 import com.wororn.storyapp.databinding.ActivityMainBinding
 import com.wororn.storyapp.factory.StoriesViewModelFactory
 import com.wororn.storyapp.interfaces.login.LoginActivity
@@ -32,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainbunching: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var searchViewModel: SearchViewModel
     private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +46,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             mainbunching.rvStory.layoutManager = LinearLayoutManager(this@MainActivity)
         }
-        val query: String = MutableLiveData(mainbunching.Searchview.query).value.toString()
-        Log.e("TagQuery01", query)
+
         val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
         mainViewModel = ViewModelProvider(this@MainActivity, factory)[MainViewModel::class.java]
-        searchViewModel = ViewModelProvider(this@MainActivity)[SearchViewModel::class.java]
 
         mainViewModel.getToken().observe(this@MainActivity) { token ->
             if (token.isEmpty()) {
@@ -80,17 +75,13 @@ class MainActivity : AppCompatActivity() {
             Log.e("TagMain", token)
             if (token.isNotEmpty()) {
                 val adapter = TabStoriesAdapter()
-                mainbunching.rvStory.adapter = adapter.withLoadStateHeaderAndFooter(
-                       header = LoadingStateAdapter {
-                       adapter.retry()
-                        },
-                        footer = LoadingStateAdapter {
-                           adapter.retry()
-                        }
+                mainbunching.rvStory.adapter = adapter.withLoadStateFooter(
+                   footer = LoadingStateAdapter {
+                        adapter.retry()
+                   }
                 )
-                mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
+                mainViewModel.listStory(token).observe(this@MainActivity) { main ->
                  adapter.submitData(lifecycle, main)
-                    Log.e("TagQuery02", query)
                 }
 
                 val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -101,31 +92,13 @@ class MainActivity : AppCompatActivity() {
                 showLoading(false)
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        if (query != null && query !="") {
-                            showLoading(true)
-                            mainbunching.rvStory.scrollToPosition(0)
-                            searchViewModel.searchQuery(query)
-                            Log.e("TagQuery03", query)
-                            searchView.clearFocus()
-                            mainViewModel.searchStory(token,query).observe(this@MainActivity) { main ->
-                                adapter.submitData(lifecycle, main)
-                            }
-                        }
-                        else {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "Information: The Query is Empty,You should try again",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            mainViewModel.listStory(token).observe(this@MainActivity) { main ->
-                                adapter.submitData(lifecycle, main)
-                            }
-                        }
-                        showLoading(false)
-                        return true
+                        mainViewModel.searchStories(query ?: "")
+                        showLoading(true)
+                        return false
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
+                        showLoading(false)
                         return false
                     }
 
@@ -139,7 +112,9 @@ class MainActivity : AppCompatActivity() {
             val inflater = menuInflater
             inflater.inflate(R.menu.menu_main, menu)
 
+            val homeMenu = menu.findItem(R.id.main)
             val modeMenu = menu.findItem(R.id.theme_mode)
+            homeMenu.isVisible = false
             modeMenu.isVisible = false
             return true
         }

@@ -6,10 +6,12 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.wororn.storyapp.R
 import com.wororn.storyapp.componen.response.TabStoriesItem
 import com.wororn.storyapp.databinding.ActivityDetailBinding
+import com.wororn.storyapp.factory.StoriesViewModelFactory
 import com.wororn.storyapp.interfaces.main.*
 import com.wororn.storyapp.tools.withDateFormat
 
@@ -24,6 +26,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(detailbunching.root)
 
         this.title = resources.getString(R.string.detail_stories)
+
+        val factory: StoriesViewModelFactory = StoriesViewModelFactory.getInstance(this)
+        mainViewModel = ViewModelProvider(this@DetailActivity, factory)[MainViewModel::class.java]
 
         val table = intent.getParcelableExtra<TabStoriesItem>(EXTRA_DATA)
         detailbunching.apply {

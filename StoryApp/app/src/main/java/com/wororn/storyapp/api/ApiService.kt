@@ -21,22 +21,12 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
-
     @GET("stories")
     suspend fun listStory(
         @Header("Authorization") token: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
     ): TableStoriesResponse
-
-
-    @GET("stories")
-    suspend fun searchStory(
-        @Header("Authorization") token: String,
-        @Query("page") page: Int,
-        @Query("size") size: Int,
-        @Query("name") name: String
-    ): SearchStoriesResponse
 
     @GET("stories")
     suspend fun tableStories(@Header("Authorization") token: String): TableStoriesResponse

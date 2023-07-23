@@ -2,7 +2,6 @@ package com.wororn.storyapp.adapter
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
@@ -28,7 +27,6 @@ class TabStoriesAdapter: PagingDataAdapter<TabStoriesItem, TabStoriesAdapter.Lis
         if (data != null) {
             holder.bind(data)
         }
-        else{  Log.e("TagDataadapter", "data is empty")}
 
     }
 

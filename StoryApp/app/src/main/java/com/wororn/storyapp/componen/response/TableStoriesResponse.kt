@@ -1,5 +1,6 @@
 package com.wororn.storyapp.componen.response
 
+
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -37,13 +38,3 @@ data class TabStoriesItem(
     @field:SerializedName("description")
     val description: String? = null
 ) : Parcelable
-
-
-data class SearchStoriesResponse(
-
-    @field:SerializedName("listStory")
-    val  listStory: List<TabStoriesItem>,
-    @field:SerializedName("name")
-    val name: String? = null
-
-)
